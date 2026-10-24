@@ -1,0 +1,67 @@
+@Metadata.layer: #CORE
+@UI:{ headerInfo: { typeName: 'Purchase Order',
+                    typeNamePlural: 'Purchase Orders',
+                    title:{ value: 'PurchaseOrder' },
+                    description:{ value: 'PurchaseDocumentCategory' } } }
+annotate entity ZC_PO_TRACKER
+    with 
+{
+    @UI.facet: [{ id: 'Purchase', type: #FIELDGROUP_REFERENCE,
+                  label: 'Purchase', targetQualifier: 'Purchase',
+                  position: 10 },
+                  
+                 { id: 'Finance', type:#FIELDGROUP_REFERENCE,
+                   label: 'Finance', targetQualifier: 'Finance',
+                   position:20 },
+                   
+                 { id: 'Quan', type:#FIELDGROUP_REFERENCE,
+                   label: 'Quantity', targetQualifier: 'Quan',
+                   position:30 },                
+                   
+                 { id: 'Status', type:#FIELDGROUP_REFERENCE,
+                   label:'Status', targetQualifier: 'Status',
+                   position:40  }
+                                  
+               ]
+    
+    @UI.fieldGroup: [{ qualifier: 'Purchase', position:10 }]              
+    @UI.lineItem: [{ position: 10 }]
+    @UI.selectionField: [{ position:10 }]
+    @EndUserText.label: 'Purchase Order'
+    PurchaseOrder;
+    
+    @UI.fieldGroup: [{ qualifier: 'Purchase', position:20 }]
+    @UI.lineItem: [{ position:20 }]
+    @UI.selectionField: [{ position:20 }]
+    @EndUserText.label: 'Company Code'
+    CompanyCode;
+    
+    @UI.fieldGroup: [{ qualifier: 'Purchase', position:30 }]
+    @UI.lineItem: [{ position:30 }]
+    @EndUserText.label: 'Purchase Document Category'
+    PurchaseDocumentCategory;
+    
+    @EndUserText.label: 'CreationDate'
+    @UI.fieldGroup: [{ qualifier: 'Purchase', position: 40 }]
+    @UI.lineItem: [{ position: 40 }]
+    CreationDate;
+    
+    @UI.fieldGroup: [{ qualifier: 'Finance', position: 10, label: 'Amount'}]
+    @UI.lineItem: [{ position:50 }]
+    @EndUserText.label: 'Amount'
+    @Consumption.valueHelpDefinition: [{ entity:{ name: 'I_Currency' , element: 'Currency' } }]
+    Amount;
+    
+    
+    @UI.fieldGroup: [{ qualifier: 'Quan', position:10, label: 'Quantity' }]
+    @UI.lineItem: [{ position:60 }]
+    @EndUserText.label: 'Quantity'
+    @Consumption.valueHelpDefinition: [{ entity: { name: 'I_UnitOfMeasure', element: 'UnitOfMeasure' } }]
+    Quantity;
+    
+
+    @UI.fieldGroup: [{ qualifier: 'Status', position:10 }]
+    @UI.lineItem: [{ position:70 }]
+    @EndUserText.label: 'Status of Material'
+    Status;
+};
