@@ -1,0 +1,45 @@
+managed implementation in class zbp_i_po_tracker unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZI_PO_TRACKER alias PurchaseOrder
+persistent table zpo_tracker
+draft table zpo_d_tracker
+lock master
+total etag Createdat
+authorization master ( instance )
+etag master CreationDate
+{
+
+  create ( authorization : global );
+  update;
+  delete;
+  field ( mandatory : create, readonly : update ) PurchaseOrder;
+  field ( readonly ) CreatedAt, CreatedBy;
+
+  draft action Resume;
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+
+  draft determine action Prepare
+  {
+    //tbd
+  }
+
+  mapping for zpo_tracker
+    {
+      PurchaseOrder            = ebeln;
+      CompanyCode              = bukrs;
+      PurchaseDocumentCategory = bstyp;
+      Amount                   = price;
+      Currency                 = currency;
+      Quantity                 = quantity;
+      UoM                      = uom;
+      Status                   = status;
+      CreationDate             = aedat;
+      CreatedBy                = ernam;
+      CreatedAt                = created_at;
+    }
+
+}
