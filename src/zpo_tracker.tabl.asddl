@@ -1,0 +1,23 @@
+@EndUserText.label : 'PO Tracker'
+@AbapCatalog.enhancement.category : #NOT_EXTENSIBLE
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #ALLOWED
+define table zpo_tracker {
+
+  key client : abap.clnt not null;
+  key ebeln  : ebeln not null;
+  bukrs      : bukrs;
+  bstyp      : bstyp;
+  @Semantics.amount.currencyCode : 'zpo_tracker.currency'
+  price      : netwr;
+  currency   : waers;
+  @Semantics.quantity.unitOfMeasure : 'zpo_tracker.uom'
+  quantity   : menge_d;
+  uom        : meins;
+  status     : zde_mat_status;
+  aedat      : aedat;
+  ernam      : abp_creation_user;
+  created_at : abp_creation_tstmpl;
+
+}
